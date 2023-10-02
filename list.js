@@ -1,0 +1,137 @@
+// Define an array to store lists
+let lists = [];
+
+// Function to create a new list
+function createList(name) {
+  const newList = {
+    name: name,
+    items: [],
+  };
+  lists.push(newList);
+  saveListsToLocalStorage();
+}
+
+// Function to display a list
+function displayList(listIndex) {
+  const selectedList = lists[listIndex];
+  const listTitle = document.querySelector('.list-content h2');
+  const listItems = document.querySelector('.list-content ul');
+
+  listTitle.textContent = selectedList.name;
+  listItems.innerHTML = '';
+
+  selectedList.items.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    
+    // Add a remove button for each item
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.classList.add("remove")
+    removeButton.addEventListener('click', () => {
+      selectedList.items.splice(index, 1);
+      displayList(listIndex);
+      saveListsToLocalStorage();
+    });
+    
+    li.appendChild(removeButton);
+    
+    listItems.appendChild(li);
+  });
+}
+
+const addItemButton = document.getElementById('add-item');
+addItemButton.addEventListener('click', () => {
+  const newItemText = document.getElementById('new-item-text').value;
+  const currentListIndex = getCurrentListIndex();
+  if (newItemText.trim() !== '') {
+    addTodoItem(currentListIndex, newItemText);
+    document.getElementById('new-item-text').value = ''; // Clear the input field
+  }
+});
+
+// Function to switch between lists
+function switchToList(listIndex) {
+  displayList(listIndex);
+}
+
+// Function to add a to-do item to the current list
+function addTodoItem(listIndex, itemText) {
+  lists[listIndex].items.push(itemText);
+  displayList(listIndex);
+  saveListsToLocalStorage();
+}
+
+// Event listener for creating a new list
+const createListButton = document.getElementById('create-list');
+createListButton.addEventListener('click', () => {
+  const newListName = document.getElementById('new-list-name').value;
+  if (newListName.trim() !== '') {
+    createList(newListName);
+    // Add code to update the list of created lists
+    displayLists();
+  }
+});
+
+// Event listener for switching between lists
+function displayLists() {
+    const listsContainer = document.querySelector('.lists');
+    listsContainer.innerHTML = '';
+  
+    lists.forEach((list, index) => {
+      const listElement = document.createElement('div');
+      listElement.textContent = list.name;
+      listElement.classList.add('list-item');
+      listElement.addEventListener('click', () => {
+        switchToList(index)
+      })
+  
+      const removeListButton = document.createElement('button');
+      removeListButton.textContent = 'Remove List';
+      removeListButton.addEventListener('click', () => {
+        removeList(index);
+      });
+  
+      listElement.appendChild(removeListButton);
+  
+      listsContainer.appendChild(listElement);
+    });
+  }
+
+
+  function removeList(listIndex) {
+    if (confirm("Are you sure you want to remove this list?")) {
+      lists.splice(listIndex, 1);
+      saveListsToLocalStorage();
+      displayLists();
+    }
+  }
+
+
+// Function to get the index of the currently displayed list
+function getCurrentListIndex() {
+  const listTitle = document.querySelector('.list-content h2').textContent;
+  return lists.findIndex(list => list.name === listTitle);
+}
+
+// Function to save lists to local storage
+function saveListsToLocalStorage() {
+  localStorage.setItem('todoLists', JSON.stringify(lists));
+}
+
+// Function to retrieve lists from local storage
+function loadListsFromLocalStorage() {
+  const storedLists = localStorage.getItem('todoLists');
+  if (storedLists) {
+    lists = JSON.parse(storedLists);
+  }
+}
+
+// Initialize the application by loading lists from local storage and displaying them
+loadListsFromLocalStorage();
+displayLists();
+
+// Display the first list or a default list
+if (lists.length > 0) {
+  displayList(0);
+}

@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/dist/output.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div class="lists">
+          <!-- List of created lists goes here -->
+        </div>
+        <div class="list-content">
+          <h2>List Title</h2>
+          <ul>
+            <!-- To-do items go here -->
+          </ul>
+        </div>
+        <div class="list-controls">
+          <input type="text" id="new-list-name" placeholder="Enter list name">
+          <button id="create-list">Create List</button>
+        </div>
+
+        <div class="list-controls">
+            <!-- Existing input field and create button for creating new lists -->
+            <input type="text" id="new-item-text" placeholder="Enter to-do item">
+            <button id="add-item">Add Item</button>
+         </div>
+      </div>
+
+      <script src="list2.js">
+
+      </script>
 </body>
 </html>
