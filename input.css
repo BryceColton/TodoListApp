@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    width: 100%;
+}
+
+.lists {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.mainContainer {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    /* padding: 10px; */
+    display: flex;
+    justify-content: center;
+
+    
+}
+
+.todo-app {
+    width: 100%;
+    max-width: 540px;
+    background: #fff;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    border-radius:10px
+}
+
+.display { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.display3 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height:75%;
+}
+
+.display2 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.display4 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    text-wrap:wrap;
+}
+
+.remove {
+    width: fit-content;
+    font-size: large;
+    background-color: red;
+    color: black;
+}
+
+.edit {
+     
+    width: fit-content;
+    font-size: large;
+    background-color: greenyellow;
+    color: black;
+    
+}
+
+/* .ri-close-circle-line {
+    background-image:url(./images/close-circle-line.png);
+} */
+
+.delete {
+    display: none;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.list-item:hover .delete {
+    display:flex;
+}
+
+.list-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-content2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

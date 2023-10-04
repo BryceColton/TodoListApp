@@ -15,7 +15,7 @@ function createList(name) {
 function displayList(listIndex) {
   const selectedList = lists[listIndex];
   const listTitle = document.querySelector('.list-content h2');
-  const listItems = document.querySelector('.list-content ul');
+  const listItems = document.querySelector('.list-content2');
 
   listTitle.textContent = selectedList.name;
   listItems.innerHTML = '';
@@ -23,16 +23,19 @@ function displayList(listIndex) {
   selectedList.items.forEach((item, index) => {
     const li = document.createElement('li');
     li.textContent = item;
+    li.className = "list-item"
+
     
-    // Add a remove button for each item
-    const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
-    removeButton.classList.add("remove")
+    
+    const removeButton = document.createElement("i");
+    removeButton.className = "fa-solid fa-x delete"
+
     removeButton.addEventListener('click', () => {
       selectedList.items.splice(index, 1);
       displayList(listIndex);
       saveListsToLocalStorage();
     });
+
     
     li.appendChild(removeButton);
     
@@ -48,6 +51,9 @@ addItemButton.addEventListener('click', () => {
     addTodoItem(currentListIndex, newItemText);
     document.getElementById('new-item-text').value = ''; // Clear the input field
   }
+  
+
+  
 });
 
 // Function to switch between lists
@@ -57,10 +63,12 @@ function switchToList(listIndex) {
 
 // Function to add a to-do item to the current list
 function addTodoItem(listIndex, itemText) {
-  lists[listIndex].items.push(itemText);
+  lists[listIndex].items.push(itemText)
   displayList(listIndex);
   saveListsToLocalStorage();
 }
+
+
 
 // Event listener for creating a new list
 const createListButton = document.getElementById('create-list');
@@ -71,6 +79,7 @@ createListButton.addEventListener('click', () => {
     // Add code to update the list of created lists
     displayLists();
   }
+  document.getElementById('new-list-name').value = ''
 });
 
 // Event listener for switching between lists
@@ -86,19 +95,63 @@ function displayLists() {
         switchToList(index)
       })
   
-      const removeListButton = document.createElement('button');
-      removeListButton.textContent = 'Remove List';
+      const removeListButton = document.createElement('i');
+      removeListButton.className = "fa-solid fa-x delete"
+
       removeListButton.addEventListener('click', () => {
         removeList(index);
       });
+      // const editButton = document.createElement('button');
+      // editButton.textContent = 'Edit';
+      // editButton.addEventListener('click', () => {
+      //   editItem(listIndex, index)
+      // });
   
+  
+      // listElement.appendChild(editButton)
       listElement.appendChild(removeListButton);
-  
       listsContainer.appendChild(listElement);
     });
   }
 
 
+  function editItem(listIndex, itemIndex) {
+    const selectedList = lists[listIndex];
+    const itemText = selectedList.items[itemIndex];
+  
+    const listItem = document.querySelector('.list-content ul').children[itemIndex];
+    const editInput = document.createElement('input');
+    editInput.value = itemText;
+  
+    listItem.innerHTML = '';
+    listItem.appendChild(editInput);
+    editInput.focus();
+  
+    editInput.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter') {
+        selectedList.items[itemIndex] = editInput.value;
+        displayList(listIndex);
+        saveListsToLocalStorage();
+      }
+    });
+  
+    // editInput.addEventListener('blur', () => {
+    //   selectedList.items[itemIndex] = editInput.value;
+    //   displayList(listIndex);
+    //   saveListsToLocalStorage();
+    // });
+  }
+  
+  
+  document.querySelector('.list-content ul').addEventListener('click', (event) => {
+    const listItem = event.target.closest('li');
+    if (listItem) {
+      const listIndex = getCurrentListIndex();
+      const itemIndex = Array.from(listItem.parentNode.children).indexOf(listItem);
+      editItem(listIndex, itemIndex);
+    }
+  });
+  
   function removeList(listIndex) {
     if (confirm("Are you sure you want to remove this list?")) {
       lists.splice(listIndex, 1);
@@ -106,32 +159,29 @@ function displayLists() {
       displayLists();
     }
   }
-
-
-// Function to get the index of the currently displayed list
-function getCurrentListIndex() {
-  const listTitle = document.querySelector('.list-content h2').textContent;
-  return lists.findIndex(list => list.name === listTitle);
-}
-
-// Function to save lists to local storage
-function saveListsToLocalStorage() {
-  localStorage.setItem('todoLists', JSON.stringify(lists));
-}
-
-// Function to retrieve lists from local storage
-function loadListsFromLocalStorage() {
-  const storedLists = localStorage.getItem('todoLists');
-  if (storedLists) {
-    lists = JSON.parse(storedLists);
+  
+  function getCurrentListIndex() {
+    const listTitle = document.querySelector('.list-content h2').textContent;
+    return lists.findIndex(list => list.name === listTitle);
   }
-}
-
-// Initialize the application by loading lists from local storage and displaying them
-loadListsFromLocalStorage();
-displayLists();
-
-// Display the first list or a default list
-if (lists.length > 0) {
-  displayList(0);
-}
+// saves lists to localstorage
+  function saveListsToLocalStorage() {
+    localStorage.setItem('todoLists', JSON.stringify(lists));
+  }
+  
+  // Function to retrieve lists from local storage
+  function loadListsFromLocalStorage() {
+    const storedLists = localStorage.getItem('todoLists');
+    if (storedLists) {
+      lists = JSON.parse(storedLists);
+    }
+  }
+  
+  // Initialize the application by loading lists from local storage and displaying them
+  loadListsFromLocalStorage();
+  displayLists();
+  
+  // Display the first list or a default list
+  if (lists.length > 0) {
+    displayList(0);
+  }
