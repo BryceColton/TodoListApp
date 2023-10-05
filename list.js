@@ -68,6 +68,13 @@ function addTodoItem(listIndex, itemText) {
   saveListsToLocalStorage();
 }
 
+function dark() {
+  let moon = document.querySelector("fa-regular fa-moon")
+  moon.addEventListener("click", function() {
+    moon.className = "dark"
+  })
+}
+
 
 
 // Event listener for creating a new list
@@ -95,24 +102,31 @@ function displayLists() {
         switchToList(index)
       })
   
+      const checkMarkIcon = document.createElement('i')
+      checkMarkIcon.className = 'fa-solid fa-square';
+      checkMarkIcon.addEventListener('click', () => {
+        checkMarkChecked(index);
+      })
+
+
       const removeListButton = document.createElement('i');
       removeListButton.className = "fa-solid fa-x delete"
 
-      removeListButton.addEventListener('click', () => {
+      removeListButton.addEventListener('toggle', () => {
         removeList(index);
       });
-      // const editButton = document.createElement('button');
-      // editButton.textContent = 'Edit';
-      // editButton.addEventListener('click', () => {
-      //   editItem(listIndex, index)
-      // });
-  
-  
-      // listElement.appendChild(editButton)
+      
       listElement.appendChild(removeListButton);
       listsContainer.appendChild(listElement);
     });
   }
+
+
+function checkMarkChecked(index) {
+    const checkMarkIcon = document.querySelector('fa-solid fa-square');
+    const checked = checkMarkIcon.classList.add("fa-solid fa-square-check")
+}
+
 
 
   function editItem(listIndex, itemIndex) {
@@ -135,11 +149,6 @@ function displayLists() {
       }
     });
   
-    // editInput.addEventListener('blur', () => {
-    //   selectedList.items[itemIndex] = editInput.value;
-    //   displayList(listIndex);
-    //   saveListsToLocalStorage();
-    // });
   }
   
   
@@ -185,3 +194,15 @@ function displayLists() {
   if (lists.length > 0) {
     displayList(0);
   }
+
+
+  function toggleDarkMode() {
+    const htmlID = document.documentElement;
+    htmlID.classList.toggle('dark');
+    console.log('Dark mode clicked')
+  }
+  
+  const moon = document.getElementById("moon")
+  moon.addEventListener("click", toggleDarkMode);
+
+ 

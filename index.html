@@ -8,43 +8,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="output.css">
 </head>
-<body>
+<body class="bg-white dark:bg-black">
   <div class="mainContainer space-x-5">
     <div class="display todo-app">
-      <nav class=" text-3xl bg-slate-800 h-24 w-full flex justify-around rounded-t-lg text-white">
+      <nav class=" text-3xl bg-slate-800 h-24 w-full flex justify-around rounded-t-lg text-white dark:bg-white dark:text-black">
         <h1>Home</h1>
         <div><i class="fa-solid fa-magnifying-glass"></i></div>
       </nav>
-      <div class="lists text-3xl display3">
+      <div class="lists text-3xl display3 dark:text-white border-x-8 border-slate-800 dark:border-white">
         <!-- List of created lists goes here -->
       </div>
-      <div class=" text-3xl bg-slate-800 h-24 w-full flex justify-around rounded-b-lg text-white">
+      <div class=" text-3xl bg-slate-800 h-24 w-full flex justify-around rounded-b-lg text-white dark:bg-white dark:text-black">
       </div>
     </div>
     <div class="display todo-app">
 
-      <nav class=" text-3xl bg-slate-800 h-24 w-full flex justify-around rounded-t-lg text-white">
-        <h1>Search</h1>
-        <div><i class="fa-regular fa-moon"></i></div>
+      <nav class=" text-3xl bg-slate-800 h-24 w-full flex justify-around rounded-t-lg text-white dark:bg-white dark:text-black">
+        <div class="darkMode" id="moon">
+          <i  class="fa-regular fa-moon "></i>
+        </div>
       </nav>
-      <div class="display3">
-        <div class="list-content">
+      <div class="display3 border-x-8 border-slate-800 dark:border-white">
+        <div class="list-content dark:text-white">
           <h2>List Title</h2>
-          <ul class="list-content2">
+          <ul class="list-content2 dark:text-white">
             <!-- To-do items go here -->
           </ul>
         </div>
-        <div class="list-controls">
+        <div class="list-controls dark:text-white">
             <input type="text" id="new-list-name" placeholder="Enter list name">
             <button id="create-list">Create List</button>
         </div>
-          <div>
+          <div class="dark:text-white">
             <!-- Existing input field and create button for creating new lists -->
             <input type="text" id="new-item-text" placeholder="Enter to-do item">
             <button id="add-item">Add Item</button>
           </div>
         </div>
-        <div class=" text-5xl bg-slate-800 h-24 w-full flex items-center justify-around rounded-b-lg text-white">
+        <div class=" text-5xl bg-slate-800 h-24 w-full flex items-center justify-around rounded-b-lg text-white dark:bg-white dark:text-black">
           <i class="fa-solid fa-trash-can"></i>
         </div>
       </div>
