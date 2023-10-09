@@ -32,7 +32,7 @@ body {
 
 .display { 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
@@ -88,9 +88,43 @@ body {
     display: none;
 }
 
+
+
+.btn {
+    border-radius: 30px;
+    background-color: orange;
+    width: 20%;
+    border: none;
+    height: 100%;
+}
+
+
+input::placeholder{
+    color: white;
+}
+
+.to-do {
+    border-radius: 30px;
+    opacity: 75%;
+    background-color: lightgrey;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    border: none;
+}
+
+
+
+.checkMarkIcon {
+    display: none;
+}
+
 .list-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 50%;
 }

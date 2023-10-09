@@ -21,9 +21,18 @@ function displayList(listIndex) {
   listItems.innerHTML = '';
 
   selectedList.items.forEach((item, index) => {
-    const li = document.createElement('li');
+    const li = document.createElement('div');
     li.textContent = item;
     li.className = "list-item"
+
+    
+    const checkMarkIcon = document.createElement('i');
+    checkMarkIcon.className = "ri-checkbox-blank-line";
+    checkMarkIcon.addEventListener('click', () => {
+    checkMarkIcon.classList.toggle("ri-checkbox-fill")
+
+    saveListsToLocalStorage();
+});
 
     
     
@@ -36,8 +45,8 @@ function displayList(listIndex) {
       saveListsToLocalStorage();
     });
 
+    li.appendChild(checkMarkIcon)
     
-    li.appendChild(removeButton);
     
     listItems.appendChild(li);
   });
@@ -102,12 +111,6 @@ function displayLists() {
         switchToList(index)
       })
   
-      const checkMarkIcon = document.createElement('i')
-      checkMarkIcon.className = 'fa-solid fa-square';
-      checkMarkIcon.addEventListener('click', () => {
-        checkMarkChecked(index);
-      })
-
 
       const removeListButton = document.createElement('i');
       removeListButton.className = "fa-solid fa-x delete"
@@ -115,17 +118,14 @@ function displayLists() {
       removeListButton.addEventListener('toggle', () => {
         removeList(index);
       });
+
+
       
       listElement.appendChild(removeListButton);
       listsContainer.appendChild(listElement);
     });
   }
 
-
-function checkMarkChecked(index) {
-    const checkMarkIcon = document.querySelector('fa-solid fa-square');
-    const checked = checkMarkIcon.classList.add("fa-solid fa-square-check")
-}
 
 
 
@@ -152,11 +152,11 @@ function checkMarkChecked(index) {
   }
   
   
-  document.querySelector('.list-content ul').addEventListener('click', (event) => {
+  document.querySelector('.list-content2').addEventListener('click', (event) => {
     const listItem = event.target.closest('li');
     if (listItem) {
       const listIndex = getCurrentListIndex();
-      const itemIndex = Array.from(listItem.parentNode.children).indexOf(listItem);
+      const itemIndex = [...listItem.parentNode.children].indexOf(listItem);
       editItem(listIndex, itemIndex);
     }
   });
@@ -199,10 +199,17 @@ function checkMarkChecked(index) {
   function toggleDarkMode() {
     const htmlID = document.documentElement;
     htmlID.classList.toggle('dark');
-    console.log('Dark mode clicked')
   }
   
   const moon = document.getElementById("moon")
   moon.addEventListener("click", toggleDarkMode);
+
+const Add = document.getElementById("add")
+Add.addEventListener("click", () => {
+  const addItem = document.createElement("input")
+  addItem.className = "bg-gray-500 rounded-2xl h-24 w-full"
+
+  
+})
 
  

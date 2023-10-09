@@ -538,20 +538,8 @@ video {
   display: flex;
 }
 
-.h-12 {
-  height: 3rem;
-}
-
 .h-24 {
   height: 6rem;
-}
-
-.h-full {
-  height: 100%;
-}
-
-.w-24 {
-  width: 6rem;
 }
 
 .w-full {
@@ -562,10 +550,6 @@ video {
   align-items: center;
 }
 
-.justify-center {
-  justify-content: center;
-}
-
 .justify-around {
   justify-content: space-around;
 }
@@ -574,10 +558,6 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.25rem * var(--tw-space-x-reverse));
   margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.rounded-2xl {
-  border-radius: 1rem;
 }
 
 .rounded-b-lg {
@@ -598,16 +578,6 @@ video {
 .border-slate-800 {
   --tw-border-opacity: 1;
   border-color: rgb(30 41 59 / var(--tw-border-opacity));
-}
-
-.bg-amber-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 158 11 / var(--tw-bg-opacity));
-}
-
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
 .bg-slate-800 {
@@ -717,35 +687,6 @@ body {
 
 .delete {
   display: none;
-}
-
-.btn {
-  border-radius: 30px;
-  background-color: orange;
-  width: 20%;
-  border: none;
-  height: 100%;
-}
-
-input::-moz-placeholder{
-  color: white;
-}
-
-input::placeholder{
-  color: white;
-}
-
-.to-do {
-  border-radius: 30px;
-  opacity: 75%;
-  background-color: lightgrey;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 2rem;
-  border: none;
 }
 
 .checkMarkIcon {
