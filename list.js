@@ -34,26 +34,30 @@ function displayList(listIndex) {
     saveListsToLocalStorage();
 });
 
+const trashDiv = document.getElementById("trashDiv")
     
-    
-    const removeButton = document.createElement("i");
-    removeButton.className = "fa-solid fa-x delete"
+const trash = document.getElementById("trash")
+trash.addEventListener('click', () => {
+  const isChecked = checkMarkIcon.classList.contains("ri-checkbox-fill");
+  if (isChecked) {
+    // Remove the item if the checkbox is checked
+    selectedList.items.splice(index, 1);
+    displayList(listIndex);
+    saveListsToLocalStorage();
+    trashDiv.appendChild(trash)
+  }
+});
 
-    removeButton.addEventListener('click', () => {
-      selectedList.items.splice(index, 1);
-      displayList(listIndex);
-      saveListsToLocalStorage();
-    });
+li.appendChild(checkMarkIcon);
+listItems.appendChild(li);
 
-    li.appendChild(checkMarkIcon)
     
-    
-    listItems.appendChild(li);
   });
 }
 
+
+function funcAddItem(){
 const addItemButton = document.getElementById('add-item');
-addItemButton.addEventListener('click', () => {
   const newItemText = document.getElementById('new-item-text').value;
   const currentListIndex = getCurrentListIndex();
   if (newItemText.trim() !== '') {
@@ -61,10 +65,8 @@ addItemButton.addEventListener('click', () => {
     document.getElementById('new-item-text').value = ''; // Clear the input field
   }
   
-
+}
   
-});
-
 // Function to switch between lists
 function switchToList(listIndex) {
   displayList(listIndex);
@@ -204,12 +206,41 @@ function displayLists() {
   const moon = document.getElementById("moon")
   moon.addEventListener("click", toggleDarkMode);
 
-const Add = document.getElementById("add")
-Add.addEventListener("click", () => {
-  const addItem = document.createElement("input")
-  addItem.className = "bg-gray-500 rounded-2xl h-24 w-full"
 
+
+  const plus = document.getElementById("plus");
+  plus.addEventListener("click", () => {
+    // Create a new input field with the id "new-item-text"
+    const addItemContainer = document.getElementById("addItemContainer");
   
-})
+    const newItemInput = document.createElement("input");
+    newItemInput.id = "new-item-text";
+    newItemInput.className = "bg-gray-400 text-white h-full w-full rounded-2xl"
+    newItemInput.placeholder = "Add a new item and press Enter";
+    
+    // Add an event listener for Enter key press
+    newItemInput.addEventListener("keydown", (event) => {
+      if (event.key === 'Enter') {
+        const newItemText = newItemInput.value;
+        const currentListIndex = getCurrentListIndex();
+        if (newItemText.trim() !== '') {
+          addTodoItem(currentListIndex, newItemText);
+          newItemInput.value = ''; 
+        }
+      }
+    });
+  
+    // Append the new input field to the addItemContainer
+    addItemContainer.appendChild(newItemInput);
+  });
+  
+  
 
- 
+
+
+
+
+
+
+
+
