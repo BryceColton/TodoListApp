@@ -117,8 +117,8 @@ function displayLists() {
       const removeListButton = document.createElement('i');
       removeListButton.className = "fa-solid fa-x delete"
 
-      removeListButton.addEventListener('toggle', () => {
-        removeList(index);
+      removeListButton.addEventListener('click', () => {
+        removeList(index)
       });
 
 

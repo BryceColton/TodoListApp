@@ -789,6 +789,11 @@ input::placeholder{
   align-items: center;
 }
 
+:is(.dark .dark\:border-x-8) {
+  border-left-width: 8px;
+  border-right-width: 8px;
+}
+
 :is(.dark .dark\:border-white) {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
