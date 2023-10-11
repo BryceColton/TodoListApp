@@ -9,6 +9,9 @@ function createList(name) {
   };
   lists.push(newList);
   saveListsToLocalStorage();
+
+  currentListIndex = lists.length - 1;
+  displayList(currentListIndex)
 }
 
 // Function to display a list
