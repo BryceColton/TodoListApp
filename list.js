@@ -20,39 +20,41 @@ function displayList(listIndex) {
   listTitle.textContent = selectedList.name;
   listItems.innerHTML = '';
 
-  selectedList.items.forEach((item, index) => {
-    const li = document.createElement('div');
-    li.textContent = item;
-    li.className = "list-item"
+selectedList.items.forEach((item, index) => {
+  const div = document.createElement('div');
+  div.className = "list-item";
 
-    
-    const checkMarkIcon = document.createElement('i');
-    checkMarkIcon.className = "ri-checkbox-blank-line";
-    checkMarkIcon.addEventListener('click', () => {
-    checkMarkIcon.classList.toggle("ri-checkbox-fill")
-
+  const checkMarkIcon = document.createElement('i');
+  checkMarkIcon.className = "ri-checkbox-blank-line";
+  checkMarkIcon.addEventListener('click', () => {
+    checkMarkIcon.classList.toggle("ri-checkbox-fill");
     saveListsToLocalStorage();
-});
-
-const trashDiv = document.getElementById("trashDiv")
-    
-const trash = document.getElementById("trash")
-trash.addEventListener('click', () => {
-  const isChecked = checkMarkIcon.classList.contains("ri-checkbox-fill");
-  if (isChecked) {
-    // Remove the item if the checkbox is checked
-    selectedList.items.splice(index, 1);
-    displayList(listIndex);
-    saveListsToLocalStorage();
-    trashDiv.appendChild(trash)
-  }
-});
-
-li.appendChild(checkMarkIcon);
-listItems.appendChild(li);
-
-    
   });
+
+  const itemText = document.createElement('span');
+  itemText.textContent = item;
+  itemText.addEventListener('click', () => {
+    editItem(listIndex, index);
+  });
+  const trashDiv = document.getElementById("trashDiv")
+
+  const trash = document.getElementById("trash")
+  trash.addEventListener('click', () => {
+    const isChecked = checkMarkIcon.classList.contains("ri-checkbox-fill");
+    if (isChecked) {
+      //Remove Items if selected by checkbox
+      selectedList.items.splice(index, 1);
+      displayList(listIndex);
+      saveListsToLocalStorage();
+      trashDiv.appendChild(trash);
+    }
+  });
+
+  div.appendChild(checkMarkIcon);
+  div.appendChild(itemText);
+  listItems.appendChild(div);
+});
+
 }
 
 
@@ -95,15 +97,15 @@ createListButton.addEventListener('click', () => {
   if (newListName.trim() !== '') {
     createList(newListName);
     // Add code to update the list of created lists
-    displayLists();
+    updateLists();
   }
   document.getElementById('new-list-name').value = ''
 });
 
 // Event listener for switching between lists
-function displayLists() {
-    const listsContainer = document.querySelector('.lists');
-    listsContainer.innerHTML = '';
+function updateLists() {
+    const titlesContainer = document.getElementById('titles')
+    titles.innerHTML = null;
   
     lists.forEach((list, index) => {
       const listElement = document.createElement('div');
@@ -112,19 +114,15 @@ function displayLists() {
       listElement.addEventListener('click', () => {
         switchToList(index)
       })
-  
 
       const removeListButton = document.createElement('i');
       removeListButton.className = "fa-solid fa-x delete"
 
       removeListButton.addEventListener('click', () => {
-        removeList(index)
+        removeList(index);
       });
-
-
-      
       listElement.appendChild(removeListButton);
-      listsContainer.appendChild(listElement);
+      titlesContainer.appendChild(listElement);
     });
   }
 
@@ -135,12 +133,13 @@ function displayLists() {
     const selectedList = lists[listIndex];
     const itemText = selectedList.items[itemIndex];
   
-    const listItem = document.querySelector('.list-content ul').children[itemIndex];
+    const listItem = document.querySelector('.list-content2').children[itemIndex];
+    const itemTextElement = listItem.querySelector('span');
+  
     const editInput = document.createElement('input');
     editInput.value = itemText;
   
-    listItem.innerHTML = '';
-    listItem.appendChild(editInput);
+    listItem.replaceChild(editInput, itemTextElement);
     editInput.focus();
   
     editInput.addEventListener('keyup', (event) => {
@@ -150,8 +149,8 @@ function displayLists() {
         saveListsToLocalStorage();
       }
     });
-  
   }
+  
   
   
   document.querySelector('.list-content2').addEventListener('click', (event) => {
@@ -167,7 +166,8 @@ function displayLists() {
     if (confirm("Are you sure you want to remove this list?")) {
       lists.splice(listIndex, 1);
       saveListsToLocalStorage();
-      displayLists();
+      loadListsFromLocalStorage()
+      updateLists();
     }
   }
   
@@ -175,12 +175,11 @@ function displayLists() {
     const listTitle = document.querySelector('.list-content h2').textContent;
     return lists.findIndex(list => list.name === listTitle);
   }
-// saves lists to localstorage
+// save lists to localstorage
   function saveListsToLocalStorage() {
     localStorage.setItem('todoLists', JSON.stringify(lists));
   }
   
-  // Function to retrieve lists from local storage
   function loadListsFromLocalStorage() {
     const storedLists = localStorage.getItem('todoLists');
     if (storedLists) {
@@ -190,7 +189,7 @@ function displayLists() {
   
   // Initialize the application by loading lists from local storage and displaying them
   loadListsFromLocalStorage();
-  displayLists();
+  updateLists();
   
   // Display the first list or a default list
   if (lists.length > 0) {
