@@ -228,6 +228,8 @@ function updateLists() {
         if (newItemText.trim() !== '') {
           addTodoItem(currentListIndex, newItemText);
           newItemInput.value = ''; 
+
+          addItemContainer.removeChild(newItemInput);
         }
       }
     });
