@@ -14,9 +14,13 @@ body {
     
 }
 
+.titleSize {
+    font-size: 1.75rem;
+}
+
 .mainContainer {
     width: 100%;
-    /* height: 100vh; */
+    height: 100vh;
     display: flex;
     justify-content: center;
     
@@ -133,6 +137,21 @@ input::placeholder{
 .list-item:hover .delete {
     display:flex;
 }
+
+
+.list-title {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    font-size: 2.5rem;
+    line-height: 1.5;
+}
+
+.list-title:hover .delete {
+    display:flex;
+}
+
 
 .list-content {
     width: 100%;

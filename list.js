@@ -64,7 +64,7 @@ selectedList.items.forEach((item, index) => {
 function funcAddItem(){
 const addItemButton = document.getElementById('add-item');
   const newItemText = document.getElementById('new-item-text').value;
-  const currentListIndex = getCurrentListIndex();
+  let currentListIndex = getCurrentListIndex();
   if (newItemText.trim() !== '') {
     addTodoItem(currentListIndex, newItemText);
     document.getElementById('new-item-text').value = ''; // Clear the input field
@@ -84,12 +84,6 @@ function addTodoItem(listIndex, itemText) {
   saveListsToLocalStorage();
 }
 
-function dark() {
-  let moon = document.querySelector("fa-regular fa-moon")
-  moon.addEventListener("click", function() {
-    moon.className = "dark"
-  })
-}
 
 
 
@@ -113,7 +107,7 @@ function updateLists() {
     lists.forEach((list, index) => {
       const listElement = document.createElement('div');
       listElement.textContent = list.name;
-      listElement.classList.add('list-item');
+      listElement.className = 'list-title'
       listElement.addEventListener('click', () => {
         switchToList(index)
       })
@@ -234,7 +228,7 @@ function updateLists() {
       }
     });
   
-    // Append the new input field to the addItemContainer
+
     addItemContainer.appendChild(newItemInput);
   });
   

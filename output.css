@@ -542,12 +542,16 @@ video {
   height: 6rem;
 }
 
-.h-32 {
-  height: 8rem;
+.w-1\/2 {
+  width: 50%;
 }
 
 .w-full {
   width: 100%;
+}
+
+.grow {
+  flex-grow: 1;
 }
 
 .flex-col {
@@ -624,6 +628,11 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -632,6 +641,10 @@ video {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
+}
+
+.font-extrabold {
+  font-weight: 800;
 }
 
 .text-white {
@@ -648,6 +661,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.titleSize {
+  font-size: 1.75rem;
 }
 
 .mainContainer {
@@ -765,6 +782,19 @@ input::placeholder{
 }
 
 .list-item:hover .delete {
+  display:flex;
+}
+
+.list-title {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  font-size: 2.5rem;
+  line-height: 1.5;
+}
+
+.list-title:hover .delete {
   display:flex;
 }
 
