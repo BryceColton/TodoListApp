@@ -203,7 +203,7 @@ function updateLists() {
   moon.addEventListener("click", toggleDarkMode);
 
 
-
+// function plus to create a new input for adding a list
   const plus = document.getElementById("plus");
   plus.addEventListener("click", () => {
     // Create a new input field with the id "new-item-text"
