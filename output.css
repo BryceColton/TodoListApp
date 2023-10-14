@@ -542,6 +542,15 @@ video {
   height: 6rem;
 }
 
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.h-full {
+  height: 100%;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -558,12 +567,12 @@ video {
   flex-direction: column;
 }
 
-.items-center {
-  align-items: center;
+.items-start {
+  align-items: flex-start;
 }
 
-.justify-end {
-  justify-content: flex-end;
+.items-center {
+  align-items: center;
 }
 
 .justify-center {
@@ -641,16 +650,6 @@ video {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .font-extrabold {
@@ -789,10 +788,15 @@ input::placeholder{
   align-items: center;
   width: 50%;
   font-size: 1.5rem;
+  cursor: pointer;
+  border-bottom: 2px transparent;
+  transition: border-color 0.3s;
 }
 
-.list-item:hover .delete {
+.list-item:hover{
   display:flex;
+  border-bottom: 2px solid var(--border-color);
+  transition: border-color 0.3s;
 }
 
 .list-title {
@@ -802,10 +806,17 @@ input::placeholder{
   width: 50%;
   font-size: 2.5rem;
   line-height: 1.5;
+  cursor: pointer;
+  border-bottom: 2px transparent;
+  transition: border-color 0.3s;
 }
 
-.list-title:hover .delete {
-  display:flex;
+:root {
+  --border-color: black;
+}
+
+.list-title:hover {
+  border-bottom: 2px solid var(--border-color)
 }
 
 .list-content {
@@ -820,6 +831,10 @@ input::placeholder{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+i {
+  cursor: pointer;
 }
 
 :is(.dark .dark\:border-white) {

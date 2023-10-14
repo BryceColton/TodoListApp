@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 body {
     width: 100%;
 }
@@ -132,10 +135,15 @@ input::placeholder{
     align-items: center;
     width: 50%;
     font-size: 1.5rem;
-}
+    cursor: pointer;
+    border-bottom: 2px transparent;
+    transition: border-color 0.3s;
+  }
 
-.list-item:hover .delete {
+.list-item:hover{
     display:flex;
+    border-bottom: 2px solid var(--border-color);
+    transition: border-color 0.3s;
 }
 
 
@@ -146,11 +154,21 @@ input::placeholder{
     width: 50%;
     font-size: 2.5rem;
     line-height: 1.5;
+    cursor: pointer;
+    border-bottom: 2px transparent;
+    transition: border-color 0.3s;
 }
 
-.list-title:hover .delete {
-    display:flex;
+:root {
+    --border-color: black;
+  }
+  
+
+
+.list-title:hover {
+    border-bottom: 2px solid var(--border-color)
 }
+
 
 
 .list-content {
@@ -165,4 +183,8 @@ input::placeholder{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+i {
+    cursor: pointer;
 }

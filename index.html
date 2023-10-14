@@ -20,7 +20,7 @@
       <div class="lists w-full display3 text-2xl dark:text-white border-x-8 border-slate-800 dark:border-white overflow-scroll">
         <div class="flex justify-center">
           <input type="text" class="grow w-1/2 bg-gray-400 text-white rounded-2xl" id="new-list-name" placeholder=" Enter list name">
-          <button id="create-list" class="bg-amber-500 rounded-2xl"><i class="ri-add-line text-5xl font-extrabold"></i></button>
+          <div id="create-list" class="bg-amber-500 rounded-2xl"><i class="ri-add-line text-5xl font-extrabold"></i></div>
           <!-- <i class="ri-add-line text-5xl"></i> -->
         </div>
         <!-- List of created lists goes here -->
@@ -39,23 +39,24 @@
           <span class="text-2xl">Dark Mode</span>
         </div>
       </nav>
-      <div class="display3 border-x-8 border-slate-800 dark:border-white overflow-scroll">
-        <div class="list-content dark:text-white">
+      <div class="display3 border-x-8 border-slate-800 dark:border-white overflow-scroll h-full">
+        <div class="list-content dark:text-white h-full">
           <h2 class="text-5xl semibold">List Title</h2>
-          <ul class="list-content2 dark:text-white">
+          <div id="list-content2" class="list-content2 dark:text-white h-fit text-3xl flex flex-col" ondragover="allowDrop(event)" ondrop="drop(event)">
             <!-- To-do items go here -->
-          </ul>
-        </div>
-        
-          <div id="addItemContainer" class=" flex justify-end items-center flex-col dark:text-white w-full">
-            <i id="plus" class="ri-add-line text-5xl bg-amber-500 rounded-2xl"></i>
-            <!-- Existing input field and create button for creating new lists -->
             
           </div>
+          <div id="addItemContainer" class=" flex justify-center items-start dark:text-white w-full h-full">
+            <i id="plus" class="ri-add-line text-5xl bg-amber-500 rounded-2xl"></i>
+          </div>
+          
         </div>
-        <div id="trashDiv" class=" text-5xl bg-slate-800 h-24 w-full flex flex-col items-center justify-center rounded-b-lg text-white dark:bg-white dark:text-black">
-          <i id="trash" class="fa-solid fa-trash-can text-5xl"></i>
-          <span class="text-2xl">Clear Selected Items</span>
+        
+          
+        </div>
+        <div id="trashDiv" class=" text-5xl bg-slate-800 h-24 w-full flex flex-col items-center justify-around rounded-b-lg text-white dark:bg-white dark:text-black">
+          <span><i id="trash" class="fa-solid fa-trash-can text-5xl"></i></span>
+          <span><p class="text-2xl">Clear Selected Items</p></span>
         </div>
       </div>
       

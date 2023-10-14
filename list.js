@@ -26,6 +26,7 @@ function displayList(listIndex) {
 selectedList.items.forEach((item, index) => {
   const div = document.createElement('div');
   div.className = "list-item";
+  div.draggable = true;
 
   const checkMarkIcon = document.createElement('i');
   checkMarkIcon.className = "ri-checkbox-blank-line";
@@ -34,11 +35,17 @@ selectedList.items.forEach((item, index) => {
     saveListsToLocalStorage();
   });
 
-  const itemText = document.createElement('span');
-  itemText.textContent = item;
-  itemText.addEventListener('click', () => {
+  const editButton = document.createElement('i');
+  editButton.className = "ri-edit-line";
+  editButton.addEventListener('click', () => {
     editItem(listIndex, index);
   });
+
+  div.addEventListener('dragstart', drag)
+
+  const itemText = document.createElement('span');
+  itemText.textContent = item;
+
   const trashDiv = document.getElementById("trashDiv")
 
   const trash = document.getElementById("trash")
@@ -49,13 +56,14 @@ selectedList.items.forEach((item, index) => {
       selectedList.items.splice(index, 1);
       displayList(listIndex);
       saveListsToLocalStorage();
-      trashDiv.appendChild(trash);
+      // trashDiv.appendChild(trash);
     }
   });
 
   div.appendChild(checkMarkIcon);
   div.appendChild(itemText);
   listItems.appendChild(div);
+  div.appendChild(editButton)
 });
 
 }
@@ -113,7 +121,7 @@ function updateLists() {
       })
 
       const removeListButton = document.createElement('i');
-      removeListButton.className = "fa-solid fa-x delete"
+      removeListButton.className = "fa-solid fa-trash-can"
 
       removeListButton.addEventListener('click', () => {
         removeList(index);
@@ -145,6 +153,12 @@ function updateLists() {
         displayList(listIndex);
         saveListsToLocalStorage();
       }
+    });
+
+    editInput.addEventListener('blur', (event) => {
+      selectedList.items[itemIndex] = editInput.value;
+      displayList(listIndex);
+      saveListsToLocalStorage();
     });
   }
   
@@ -208,11 +222,12 @@ function updateLists() {
   plus.addEventListener("click", () => {
     // Create a new input field with the id "new-item-text"
     const addItemContainer = document.getElementById("addItemContainer");
+    const listContent2 = document.getElementById('list-content2')
   
     const newItemInput = document.createElement("input");
     newItemInput.id = "new-item-text";
-    newItemInput.className = "bg-gray-400 text-white h-full w-full rounded-2xl"
-    newItemInput.placeholder = "Add a new item and press Enter";
+    newItemInput.className = "bg-gray-400 text-white h-fit w-full rounded-2xl"
+    newItemInput.placeholder = "    Add a new item and press Enter";
     
     // Add an event listener for Enter key press
     newItemInput.addEventListener("keydown", (event) => {
@@ -223,14 +238,42 @@ function updateLists() {
           addTodoItem(currentListIndex, newItemText);
           newItemInput.value = ''; 
 
-          addItemContainer.removeChild(newItemInput);
+          // listContent2.removeChild(newItemInput);
         }
       }
     });
   
 
-    addItemContainer.appendChild(newItemInput);
+    listContent2.appendChild(newItemInput);
   });
+
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+
+  function drag(event) {
+    event.dataTransfer.setData("text/plain", event.target.innerText);
+  }
+
+
+  function drop(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData('text/plain');
+    const target = event.target;
+  
+    if (target.classList.contains('list-item')) {
+      const sourceIndex = [...target.parentNode.children].indexOf(event.target);
+      const destinationIndex = [...target.parentNode.children].indexOf(target);
+  
+      const listIndex = getCurrentListIndex();
+      const selectedList = lists[listIndex];
+      selectedList.items.splice(sourceIndex, 1);
+      selectedList.items.splice(destinationIndex, 0, data);
+  
+      displayList(listIndex);
+      saveListsToLocalStorage();
+    }
+  }
   
   
 
