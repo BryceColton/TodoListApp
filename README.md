@@ -1,2 +1,4 @@
 # TodoListApp
 This is my Todo List app. To get started on how to use it you need to enter a title and then you will see the title displayed on the other side. On that side there is a plus button, click on that to add something to your list. Once your dont typing you press enter and it will add it to the list. Once your done with an item in your list and you'd like to deleted you can go ahead and click on the checkmark to selected and then click on the trash icon below to have it removed from your list. If you have made several lists you can switch between them by clicking on the titles. You can also remove an entire list by hovering over the title of that list and clicking the 'X' mark it will ask "are you sure you want to remove this" and then you can click 'yes' or 'no'. If you would prefer dark mode you can switch between light and dark by clicking on the sun Icon on the top left side.
+
+deployed https://brycecolton.github.io/TodoListApp/
